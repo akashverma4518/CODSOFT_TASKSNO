@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Grade Calculator | CodSoft Task 2</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts for professional typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-decor"></div>
+  
+  <main class="container">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="badge">CodSoft Internship • Task 2</div>
+      <h1>Student Grade Calculator</h1>
+      <p>Enter the student details and subject marks (0–100) to evaluate performance, overall percentage, and final grade.</p>
+    </header>
+
+    <div class="layout-grid">
+      <!-- Calculator Form Section -->
+      <section class="card form-card">
+        <form id="gradeForm" novalidate>
+          <div class="form-group">
+            <label for="studentName">Student Full Name <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="studentName" 
+              placeholder="e.g. Alex Johnson" 
+              autocomplete="off"
+            >
+            <span class="error-msg" id="nameError"></span>
+          </div>
+
+          <div class="subjects-header">
+            <h3>Subject Marks (Max: 100 each)</h3>
+            <span class="sub-hint">Passing criteria: Minimum 40 marks in each subject</span>
+          </div>
+
+          <!-- Subject 1: Mathematics -->
+          <div class="form-group subject-group">
+            <label for="maths">Mathematics</label>
+            <div class="input-wrapper">
+              <input 
+                type="number" 
+                id="maths" 
+                min="0" 
+                max="100" 
+                placeholder="0 - 100"
+              >
+              <span class="unit">/ 100</span>
+            </div>
+            <span class="error-msg" id="mathsError"></span>
+          </div>
+
+          <!-- Subject 2: Physics -->
+          <div class="form-group subject-group">
+            <label for="physics">Physics</label>
+            <div class="input-wrapper">
+              <input 
+                type="number" 
+                id="physics" 
+                min="0" 
+                max="100" 
+                placeholder="0 - 100"
+              >
+              <span class="unit">/ 100</span>
+            </div>
+            <span class="error-msg" id="physicsError"></span>
+          </div>
+
+          <!-- Subject 3: Chemistry -->
+          <div class="form-group subject-group">
+            <label for="chemistry">Chemistry</label>
+            <div class="input-wrapper">
+              <input 
+                type="number" 
+                id="chemistry" 
+                min="0" 
+                max="100" 
+                placeholder="0 - 100"
+              >
+              <span class="unit">/ 100</span>
+            </div>
+            <span class="error-msg" id="chemistryError"></span>
+          </div>
+
+          <!-- Subject 4: Computer Science -->
+          <div class="form-group subject-group">
+            <label for="cs">Computer Science</label>
+            <div class="input-wrapper">
+              <input 
+                type="number" 
+                id="cs" 
+                min="0" 
+                max="100" 
+                placeholder="0 - 100"
+              >
+              <span class="unit">/ 100</span>
+            </div>
+            <span class="error-msg" id="csError"></span>
+          </div>
+
+          <!-- Subject 5: English -->
+          <div class="form-group subject-group">
+            <label for="english">English</label>
+            <div class="input-wrapper">
+              <input 
+                type="number" 
+                id="english" 
+                min="0" 
+                max="100" 
+                placeholder="0 - 100"
+              >
+              <span class="unit">/ 100</span>
+            </div>
+            <span class="error-msg" id="englishError"></span>
+          </div>
+
+          <!-- Form Buttons -->
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary" id="calculateBtn">
+              Calculate Result
+            </button>
+            <button type="button" class="btn btn-secondary" id="resetBtn">
+              Reset Form
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Result Section -->
+      <section class="card result-card" id="resultCard" aria-live="polite">
+        <!-- Initial Placeholder State -->
+        <div class="placeholder-state" id="placeholderState">
+          <div class="placeholder-icon">📊</div>
+          <h3>Ready for Evaluation</h3>
+          <p>Fill out the student details and subject marks on the left, then click <strong>Calculate Result</strong> to generate the comprehensive scorecard.</p>
+        </div>
+
+        <!-- Calculated Report State (Hidden initially) -->
+        <div class="report-content" id="reportContent" style="display: none;">
+          <div class="report-header">
+            <div class="student-meta">
+              <span class="meta-label">Student Scorecard</span>
+              <h2 id="resStudentName">Student Name</h2>
+            </div>
+            <div class="status-badge" id="resStatusBadge">PASS</div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-title">Total Marks</span>
+              <span class="stat-value" id="resTotal">0 / 500</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Percentage</span>
+              <span class="stat-value" id="resPercentage">0.00%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-title">Average Marks</span>
+              <span class="stat-value" id="resAverage">0.00</span>
+            </div>
+            <div class="stat-box grade-box">
+              <span class="stat-title">Assigned Grade</span>
+              <span class="stat-value highlight" id="resGrade">A+</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar Representation -->
+          <div class="progress-section">
+            <div class="progress-label">
+              <span>Overall Score Progress</span>
+              <span id="progressBarLabel">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
+          </div>
+
+          <!-- Subject Marks Breakdown -->
+          <div class="breakdown-section">
+            <h4>Subject Performance Breakdown</h4>
+            <div class="subject-chips" id="subjectChips">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Status Message / Remarks -->
+          <div class="remarks-box" id="remarksBox">
+            <p id="resRemarks">Remarks will appear here.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; CodSoft Internship Project | Developed with Vanilla HTML, CSS & JavaScript</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

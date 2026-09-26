@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS & Programming Quiz App | CodSoft Task 4</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-mesh"></div>
+
+  <main class="quiz-container">
+    <!-- Header -->
+    <header class="quiz-header">
+      <div class="badge">CodSoft Internship • Task 4</div>
+      <h1>CS & Tech Knowledge Quiz</h1>
+      <p>Test your fundamentals across Core Computer Science, Programming, Data Structures & Web Tech</p>
+    </header>
+
+    <!-- Quiz Main Card Container -->
+    <div class="quiz-card">
+
+      <!-- ================= 1. START SCREEN ================= -->
+      <section id="startScreen" class="screen-panel active">
+        <div class="welcome-box">
+          <div class="quiz-hero-icon">💻</div>
+          <h2>Ready to Test Your Skills?</h2>
+          <p class="quiz-intro-text">
+            Challenge yourself with 10 questions covering Python, Java, C++, DSA, OS, DBMS, Networks, and Web Development.
+          </p>
+
+          <div class="rules-card">
+            <h3>📋 Quiz Guidelines</h3>
+            <ul class="rules-list">
+              <li>⏱️ <strong>30 seconds</strong> per question timer.</li>
+              <li>🎯 <strong>10 questions</strong> with 4 multiple-choice options each.</li>
+              <li>🔒 You must select an answer before proceeding.</li>
+              <li>⚡ Immediate visual answer verification upon selection.</li>
+              <li>🏆 Comprehensive performance scorecard upon completion.</li>
+            </ul>
+          </div>
+
+          <button type="button" class="btn btn-start" id="startBtn">
+            Start Quiz Now →
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= 2. ACTIVE QUIZ QUESTION SCREEN ================= -->
+      <section id="questionScreen" class="screen-panel">
+        <!-- Status Bar: Question Counter & Timer -->
+        <div class="quiz-status-bar">
+          <div class="question-tracker">
+            <span class="tracker-label">QUESTION</span>
+            <span class="tracker-count" id="questionNumber">Question 1 of 10</span>
+          </div>
+
+          <div class="category-pill" id="questionCategory">Category</div>
+
+          <!-- Circular / Numeric Timer -->
+          <div class="timer-box" id="timerBox">
+            <span class="timer-icon">⏳</span>
+            <span class="timer-seconds" id="timerSeconds">30</span>s
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Question Prompt -->
+        <div class="question-content">
+          <h2 class="question-text" id="questionText">Loading question prompt...</h2>
+        </div>
+
+        <!-- 4 Multiple Choice Options -->
+        <div class="options-grid" id="optionsContainer">
+          <!-- Dynamically injected via script.js -->
+        </div>
+
+        <!-- Selection Notice / Validation Hint -->
+        <div class="feedback-msg" id="feedbackMsg"></div>
+
+        <!-- Action Navigation Bar -->
+        <div class="quiz-action-bar">
+          <span class="hint-text" id="quizHint">Select an option to enable the next button</span>
+          <button type="button" class="btn btn-next" id="nextBtn" disabled>
+            Next Question →
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= 3. SCORE / RESULT SCREEN ================= -->
+      <section id="resultScreen" class="screen-panel">
+        <div class="result-box">
+          <div class="result-badge-icon" id="resIcon">🏆</div>
+          <h2 class="result-title" id="resTitle">Quiz Completed!</h2>
+          <p class="result-subtitle" id="resSubtitle">Here is your performance summary:</p>
+
+          <!-- Circular / Big Score Highlight -->
+          <div class="score-circle">
+            <div class="score-number" id="resScore">8 / 10</div>
+            <div class="score-percent" id="resPercent">80% Score</div>
+          </div>
+
+          <!-- Score Metrics Breakdown -->
+          <div class="metrics-grid">
+            <div class="metric-card metric-correct">
+              <span class="metric-label">Correct Answers</span>
+              <span class="metric-value" id="resCorrect">8</span>
+            </div>
+            <div class="metric-card metric-wrong">
+              <span class="metric-label">Wrong / Missed</span>
+              <span class="metric-value" id="resWrong">2</span>
+            </div>
+            <div class="metric-card metric-accuracy">
+              <span class="metric-label">Accuracy Rate</span>
+              <span class="metric-value" id="resAccuracy">80%</span>
+            </div>
+          </div>
+
+          <!-- Evaluation Remarks -->
+          <div class="performance-remarks" id="resRemarks">
+            Outstanding performance! You have strong grasp of core computer science topics.
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="result-actions">
+            <button type="button" class="btn btn-restart" id="restartBtn">
+              🔄 Retake Quiz
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="quiz-footer">
+      <p>&copy; CodSoft Web Development Internship | Interactive Vanilla JS Quiz</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

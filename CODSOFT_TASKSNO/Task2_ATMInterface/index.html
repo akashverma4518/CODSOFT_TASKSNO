@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATM Interface Simulator | CodSoft Task 3</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="atm-container">
+    <!-- Top Brand Header -->
+    <header class="atm-topbar">
+      <div class="brand">
+        <span class="brand-icon">🏦</span>
+        <div class="brand-text">
+          <h2>CODSOFT NATIONAL BANK</h2>
+          <span>24/7 Automated Teller Machine • Simulation</span>
+        </div>
+      </div>
+      <div class="terminal-info">
+        <span class="status-dot"></span>
+        <span>TERMINAL #CS-7842</span>
+      </div>
+    </header>
+
+    <!-- Main ATM Kiosk Chassis -->
+    <div class="atm-kiosk">
+      <!-- Screen Bezel -->
+      <div class="screen-bezel">
+        <div class="screen-glare"></div>
+
+        <!-- ================= VIEW 1: AUTHENTICATION / PIN SCREEN ================= -->
+        <section id="authScreen" class="atm-view active">
+          <div class="auth-header">
+            <div class="chip-card-icon">💳</div>
+            <h3>Welcome to CodSoft ATM</h3>
+            <p>Please enter your 4-digit Secret PIN to access your account</p>
+          </div>
+
+          <div class="pin-display-wrapper">
+            <label for="pinInput" class="screen-subtext">Demo PIN: <strong>1234</strong></label>
+            <div class="pin-dots" id="pinDots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <input 
+              type="password" 
+              id="pinInput" 
+              maxlength="4" 
+              pattern="\d*" 
+              inputmode="numeric" 
+              placeholder="••••"
+              autocomplete="off"
+            >
+            <p class="error-banner" id="authError"></p>
+          </div>
+
+          <!-- On-Screen Keypad for realism -->
+          <div class="keypad-container">
+            <div class="atm-keypad">
+              <button type="button" class="key-btn" data-key="1">1</button>
+              <button type="button" class="key-btn" data-key="2">2</button>
+              <button type="button" class="key-btn" data-key="3">3</button>
+              <button type="button" class="key-btn" data-key="4">4</button>
+              <button type="button" class="key-btn" data-key="5">5</button>
+              <button type="button" class="key-btn" data-key="6">6</button>
+              <button type="button" class="key-btn" data-key="7">7</button>
+              <button type="button" class="key-btn" data-key="8">8</button>
+              <button type="button" class="key-btn" data-key="9">9</button>
+              <button type="button" class="key-btn key-clear" id="keyClear">CLEAR</button>
+              <button type="button" class="key-btn" data-key="0">0</button>
+              <button type="button" class="key-btn key-enter" id="keyEnter">ENTER</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= VIEW 2: ATM DASHBOARD ================= -->
+        <section id="dashboardScreen" class="atm-view">
+          <div class="dashboard-header">
+            <div class="user-greeting">
+              <span class="acc-badge">Savings A/C •••• 5849</span>
+              <h3>Welcome, <span>Student User</span></h3>
+            </div>
+            <button class="logout-btn" id="logoutBtn" title="Safely exit and lock session">
+              🚪 Logout
+            </button>
+          </div>
+
+          <!-- Fast Balance Glance Strip -->
+          <div class="balance-strip">
+            <div>
+              <span class="strip-label">Available Balance</span>
+              <div class="strip-balance" id="dashBalanceDisplay">₹10,000.00</div>
+            </div>
+            <div class="card-type-tag">DEBIT VISA</div>
+          </div>
+
+          <!-- Alert / Notification Banner -->
+          <div id="actionBanner" class="action-banner"></div>
+
+          <!-- ATM Main Menu Actions -->
+          <div class="dashboard-menu">
+            <button type="button" class="menu-card" id="btnMenuBalance">
+              <span class="menu-icon">👁️</span>
+              <span class="menu-title">Check Balance</span>
+              <span class="menu-desc">View full account balance details</span>
+            </button>
+
+            <button type="button" class="menu-card" id="btnMenuDeposit">
+              <span class="menu-icon">📥</span>
+              <span class="menu-title">Deposit Money</span>
+              <span class="menu-desc">Add cash to your bank balance</span>
+            </button>
+
+            <button type="button" class="menu-card" id="btnMenuWithdraw">
+              <span class="menu-icon">📤</span>
+              <span class="menu-title">Withdraw Money</span>
+              <span class="menu-desc">Dispense cash from savings account</span>
+            </button>
+
+            <button type="button" class="menu-card" id="btnMenuHistory">
+              <span class="menu-icon">📜</span>
+              <span class="menu-title">Transaction History</span>
+              <span class="menu-desc">Review recent deposits and withdrawals</span>
+            </button>
+
+            <button type="button" class="menu-card" id="btnMenuChangePin">
+              <span class="menu-icon">🔒</span>
+              <span class="menu-title">Change PIN</span>
+              <span class="menu-desc">Update your secret ATM security PIN</span>
+            </button>
+
+            <button type="button" class="menu-card reset-card" id="btnResetDemo">
+              <span class="menu-icon">🔄</span>
+              <span class="menu-title">Reset Demo</span>
+              <span class="menu-desc">Restore ₹10,000 & PIN 1234</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ================= VIEW 3: SUB-PANEL MODAL / OPERATION OVERLAY ================= -->
+        <div id="operationOverlay" class="operation-overlay">
+          <div class="operation-box">
+            <button type="button" class="close-overlay" id="closeOverlayBtn">&times;</button>
+            <h3 id="overlayTitle">Operation Title</h3>
+            <div id="overlayContent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Kiosk Hardware Simulation -->
+    <div class="hardware-strip">
+      <div class="card-slot">
+        <span class="slot-label">CARD READER</span>
+        <div class="slot-opening"></div>
+      </div>
+      <div class="cash-dispenser">
+        <span class="slot-label">CASH DISPENSER & DEPOSIT SLOT</span>
+        <div class="slot-opening wide"></div>
+      </div>
+    </div>
+
+    <footer class="atm-footer">
+      <p>CodSoft Task 3 • Built with Semantic HTML, Modern CSS and Vanilla JavaScript (Frontend Simulation)</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
